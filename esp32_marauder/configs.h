@@ -1,15 +1,13 @@
+#pragma once
+
 #ifndef configs_h
 
   #define configs_h
 
   #define POLISH_POTATO
 
-  //Indicates that it must redirect the stream with the captured packets to serial (1)
-  //If not defined, will write packages to SD card if supported
-  //#define WRITE_PACKETS_SERIAL
-  
   //// BOARD TARGETS
-  //define MARAUDER_M5STICKC
+  //#define MARAUDER_M5STICKC
   //#define MARAUDER_MINI
   //#define MARAUDER_V4
   //#define MARAUDER_V6
@@ -20,10 +18,10 @@
   //#define ESP32_LDDB
   //#define MARAUDER_DEV_BOARD_PRO
   //#define XIAO_ESP32_S3
-  #define MARAUDER_NetNinja_BOARD
+  #define MARAUDER_NETNINJA_BOARD
   //// END BOARD TARGETS
 
-  #define MARAUDER_VERSION "v0.13.5"
+  #define MARAUDER_VERSION "v0.13.7"
 
   //// HARDWARE NAMES
   #ifdef MARAUDER_M5STICKC
@@ -46,8 +44,8 @@
     #define HARDWARE_NAME "Flipper Zero Dev Board Pro"
   #elif defined(XIAO_ESP32_S3)
     #define HARDWARE_NAME "XIAO ESP32 S3"
-  #elif defined(MARAUDER_NetNinja_BOARD)
-    #define HARDWARE_NAME "BPM Circuits NetNinja"
+  #elif defined(MARAUDER_NETNINJA_BOARD)
+    #define HARDWARE_NAME "BPM Circuits FEBERIS"
   #else
     #define HARDWARE_NAME "ESP32"
   #endif
@@ -71,7 +69,7 @@
 
   #ifdef MARAUDER_MINI
     //#define FLIPPER_ZERO_HAT
-    #define HAS_BATTERY
+    //#define HAS_BATTERY
     #define HAS_BT
     #define HAS_BUTTONS
     #define HAS_NEOPIXEL_LED
@@ -148,10 +146,8 @@
     //#define HAS_PWR_MGMT
     //#define HAS_SCREEN
     #define HAS_GPS
-    #ifndef WRITE_PACKETS_SERIAL
-      #define HAS_SD
-      #define USE_SD
-    #endif
+    #define HAS_SD
+    #define USE_SD
     //#define HAS_TEMP_SENSOR
   #endif
 
@@ -196,7 +192,7 @@
     //#define HAS_GPS
   #endif
 
-  #ifdef MARAUDER_NetNinja_BOARD
+  #ifdef MARAUDER_NETNINJA_BOARD
     #define FLIPPER_ZERO_HAT
     //#define HAS_BATTERY
     #define HAS_BT
@@ -210,24 +206,6 @@
     #define HAS_GPS
   #endif
   //// END BOARD FEATURES
-
-  //// FLIPPER ZERO HAT SETTINGS
-  #ifdef FLIPPER_ZERO_HAT
-
-    //#ifdef MARAUDER_FLIPPER
-    //  #define USE_FLIPPER_SD
-    //#endif
-
-    #ifdef XIAO_ESP32_S3
-      #define USE_FLIPPER_SD
-    #endif
-
-    #ifdef MARAUDER_NetNinja_BOARD
-      #define USE_FLIPPER_SD
-    #endif
-
-  #endif
-  //// END FLIPPER ZERO HAT SETTINGS
 
   //// POWER MANAGEMENT
   #ifdef HAS_PWR_MGMT
@@ -686,13 +664,7 @@
   //// END MENU DEFINITIONS
 
   //// SD DEFINITIONS
-  #ifdef FLIPPER_ZERO_HAT
-
-    #ifdef USE_FLIPPER_SD
-      #define WRITE_PACKETS_SERIAL
-    #endif
-
-  #elif defined(USE_SD)
+  #if defined(USE_SD)
 
     #ifdef MARAUDER_V4
       #define SD_CS 12
@@ -785,7 +757,7 @@
     #define MEM_LOWER_LIM 20000
   #elif defined(XIAO_ESP32_S3)
     #define MEM_LOWER_LIM 20000
-  #elif defined(MARAUDER_NetNinja_BOARD)
+  #elif defined(MARAUDER_NETNINJA_BOARD)
     #define MEM_LOWER_LIM 20000
   #endif
   //// END MEMORY LOWER LIMIT STUFF
@@ -803,22 +775,6 @@
   
   #endif
   //// END NEOPIXEL STUFF
-
-  //// BOARD PIN OVERRIDES
-  #ifdef XIAO_ESP32_S3
-    #ifdef USE_FLIPPER_SD
-      #define XIAO_RX1 1
-      #define XIAO_TX1 2
-    #endif
-  #endif
-
-  #ifdef MARAUDER_NetNinja_BOARD
-    #ifdef USE_FLIPPER_SD
-      #define NetNinja_RX2 16
-      #define NetNinja_TX2 17
-    #endif
-  #endif
-  //// END BOARD PIN OVERRIDES
 
   //// EVIL PORTAL STUFF
   #ifdef MARAUDER_M5STICKC
@@ -841,7 +797,7 @@
     #define MAX_HTML_SIZE 20000
   #elif defined(XIAO_ESP32_S3)
     #define MAX_HTML_SIZE 20000
-  #elif defined(MARAUDER_NetNinja_BOARD)
+  #elif defined(MARAUDER_NETNINJA_BOARD)
     #define MAX_HTML_SIZE 11400
   #else
     #define MAX_HTML_SIZE 20000
@@ -876,11 +832,7 @@
       #define GPS_RX 22
       #define mac_history_len 512
     #elif defined(MARAUDER_FLIPPER)
-      #ifdef WRITE_PACKETS_SERIAL
-        #define GPS_SOFTWARE_SERIAL
-      #else
-        #define GPS_SERIAL_INDEX 1
-      #endif
+      #define GPS_SERIAL_INDEX 1
       #define GPS_TX 9
       #define GPS_RX 21
       #define mac_history_len 512
@@ -889,8 +841,8 @@
       #define GPS_TX 33
       #define GPS_RX 32
       #define mac_history_len 512
-    #elif defined(MARAUDER_NetNinja_BOARD)
-      #define GPS_SERIAL_INDEX 1
+    #elif defined(MARAUDER_NETNINJA_BOARD)
+      #define GPS_SERIAL_INDEX 2
       #define GPS_TX 4
       #define GPS_RX 13
       #define mac_history_len 512
@@ -909,7 +861,7 @@
     #define MARAUDER_TITLE_BYTES 13578
   #elif defined(MARAUDER_MINI)
     #define MARAUDER_TITLE_BYTES 13578
-  #elif defined(MARAUDER_NetNinja_BOARD)
+  #elif defined(MARAUDER_NETNINJA_BOARD)
     #define MARAUDER_TITLE_BYTES 13578
   #else
     #define MARAUDER_TITLE_BYTES 13578
