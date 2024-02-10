@@ -9,7 +9,7 @@
 ## How to update NETNINJA
 
 <img
-  src="https://github.com/bpmcircuits/ESP32Marauder_NETNINJA/blob/master/UpdateInstruction_ESPFlasher.png"
+  src="https://github.com/bpmcircuits/ESP32Marauder_FEBERIS/blob/feberis/UpdateInstruction_ESPFlasher.png"
   alt="Alt text"
   title="Optional title"
   style="display: inline-block; margin: 0 auto; max-width: 300px">
