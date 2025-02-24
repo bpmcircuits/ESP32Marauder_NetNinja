@@ -8,26 +8,35 @@
 
   //// BOARD TARGETS
   //#define MARAUDER_M5STICKC
+  //#define MARAUDER_M5STICKCP2
   //#define MARAUDER_MINI
   //#define MARAUDER_V4
   //#define MARAUDER_V6
   //#define MARAUDER_V6_1
+  //#define MARAUDER_V7
   //#define MARAUDER_KIT
   //#define GENERIC_ESP32
   //#define MARAUDER_FLIPPER
   //#define ESP32_LDDB
   //#define MARAUDER_DEV_BOARD_PRO
   //#define XIAO_ESP32_S3
-  #define MARAUDER_NETNINJA_BOARD
+  //#define MARAUDER_REV_FEATHER
+  #define BPMCIRCUITS_FEBERIS
   //// END BOARD TARGETS
 
-  #define MARAUDER_VERSION "v0.13.7"
+  #define MARAUDER_VERSION "v1.2.1"
 
   //// HARDWARE NAMES
   #ifdef MARAUDER_M5STICKC
     #define HARDWARE_NAME "M5Stick-C Plus"
+  #elif defined(MARAUDER_M5STICKCP2)
+    #define HARDWARE_NAME "M5Stick-C Plus2"
   #elif defined(MARAUDER_MINI)
     #define HARDWARE_NAME "Marauder Mini"
+  #elif defined(MARAUDER_V7)
+    #define HARDWARE_NAME "Marauder v7"
+  #elif defined(MARAUDER_REV_FEATHER)
+    #define HARDWARE_NAME "Adafruit Feather ESP32-S2 Reverse TFT"
   #elif defined(MARAUDER_V4)
     #define HARDWARE_NAME "Marauder v4"
   #elif defined(MARAUDER_V6)
@@ -42,10 +51,10 @@
     #define HARDWARE_NAME "ESP32 LDDB"
   #elif defined(MARAUDER_DEV_BOARD_PRO)
     #define HARDWARE_NAME "Flipper Zero Dev Board Pro"
+  #elif defined(BPMCIRCUITS_FEBERIS)
+    #define HARDWARE_NAME "BPM Circuits FEBERIS"
   #elif defined(XIAO_ESP32_S3)
     #define HARDWARE_NAME "XIAO ESP32 S3"
-  #elif defined(MARAUDER_NETNINJA_BOARD)
-    #define HARDWARE_NAME "BPM Circuits FEBERIS"
   #else
     #define HARDWARE_NAME "ESP32"
   #endif
@@ -53,7 +62,7 @@
   //// END HARDWARE NAMES
 
  //// BOARD FEATURES
-  #ifdef MARAUDER_M5STICKC
+  #if defined(MARAUDER_M5STICKC) || defined(MARAUDER_M5STICKCP2)
     //#define FLIPPER_ZERO_HAT
     #define HAS_BATTERY
     #define HAS_BT
@@ -61,6 +70,7 @@
     //#define HAS_NEOPIXEL_LED
     #define HAS_PWR_MGMT
     #define HAS_SCREEN
+    #define HAS_MINI_SCREEN
     #define HAS_SD
     #define USE_SD
     #define HAS_TEMP_SENSOR
@@ -75,6 +85,38 @@
     #define HAS_NEOPIXEL_LED
     //#define HAS_PWR_MGMT
     #define HAS_SCREEN
+    #define HAS_MINI_SCREEN
+    #define HAS_SD
+    #define USE_SD
+    #define HAS_TEMP_SENSOR
+    #define HAS_GPS
+  #endif
+
+  #ifdef MARAUDER_V7
+    //#define FLIPPER_ZERO_HAT
+    #define HAS_BATTERY
+    #define HAS_BT
+    #define HAS_BT_REMOTE
+    #define HAS_BUTTONS
+    #define HAS_NEOPIXEL_LED
+    //#define HAS_PWR_MGMT
+    #define HAS_SCREEN
+    #define HAS_FULL_SCREEN
+    #define HAS_SD
+    #define USE_SD
+    #define HAS_TEMP_SENSOR
+    #define HAS_GPS
+  #endif
+
+  #ifdef MARAUDER_REV_FEATHER
+    //#define FLIPPER_ZERO_HAT
+    //#define HAS_BATTERY
+    //#define HAS_BT
+    #define HAS_BUTTONS
+    #define HAS_NEOPIXEL_LED
+    //#define HAS_PWR_MGMT
+    #define HAS_SCREEN
+    #define HAS_MINI_SCREEN
     #define HAS_SD
     #define USE_SD
     #define HAS_TEMP_SENSOR
@@ -89,6 +131,7 @@
     #define HAS_NEOPIXEL_LED
     //#define HAS_PWR_MGMT
     #define HAS_SCREEN
+    #define HAS_FULL_SCREEN
     #define HAS_SD
     #define USE_SD
     #define HAS_TEMP_SENSOR
@@ -104,6 +147,7 @@
     #define HAS_NEOPIXEL_LED
     //#define HAS_PWR_MGMT
     #define HAS_SCREEN
+    #define HAS_FULL_SCREEN
     #define HAS_SD
     #define USE_SD
     #define HAS_TEMP_SENSOR
@@ -118,6 +162,7 @@
     #define HAS_NEOPIXEL_LED
     //#define HAS_PWR_MGMT
     #define HAS_SCREEN
+    #define HAS_FULL_SCREEN
     #define HAS_SD
     #define USE_SD
     #define HAS_TEMP_SENSOR
@@ -179,6 +224,19 @@
     #define HAS_GPS
   #endif
 
+  #ifdef BPMCIRCUITS_FEBERIS
+    #define FLIPPER_ZERO_HAT
+    //#define HAS_BATTERY
+    #define HAS_BT
+    //#define HAS_BUTTONS
+    #define HAS_NEOPIXEL_LED
+    //#define HAS_PWR_MGMT
+    //#define HAS_SCREEN
+    //#define HAS_SD
+    //#define HAS_TEMP_SENSOR
+    #define HAS_GPS
+  #endif
+
   #ifdef XIAO_ESP32_S3
     #define FLIPPER_ZERO_HAT
     //#define HAS_BATTERY
@@ -191,26 +249,17 @@
     //#define HAS_TEMP_SENSOR
     //#define HAS_GPS
   #endif
-
-  #ifdef MARAUDER_NETNINJA_BOARD
-    #define FLIPPER_ZERO_HAT
-    //#define HAS_BATTERY
-    #define HAS_BT
-    //#define HAS_BUTTONS
-    #define HAS_NEOPIXEL_LED
-    //#define HAS_PWR_MGMT
-    //#define HAS_SCREEN
-    //#define HAS_SD
-    //#define USE_SD
-    //#define HAS_TEMP_SENSOR
-    #define HAS_GPS
-  #endif
   //// END BOARD FEATURES
 
   //// POWER MANAGEMENT
   #ifdef HAS_PWR_MGMT
-    #ifdef MARAUDER_M5STICKC
+    #if defined(MARAUDER_M5STICKC) || defined(MARAUDER_M5STICKCP2)
       #include "AXP192.h"
+    #endif
+
+    #ifdef MARAUDER_M5STICKCP2
+        // Prevent StickCP2 from turning off when disconnect USB cable
+        #define POWER_HOLD_PIN 4
     #endif
   #endif
   //// END POWER MANAGEMENT
@@ -218,12 +267,64 @@
   //// BUTTON DEFINITIONS
   #ifdef HAS_BUTTONS
 
+    #ifdef MARAUDER_REV_FEATHER
+      #define L_BTN -1
+      #define C_BTN 1
+      #define U_BTN 0
+      #define R_BTN -1
+      #define D_BTN 2
+
+      //#define HAS_L
+      //#define HAS_R
+      #define HAS_U
+      #define HAS_D
+      #define HAS_C
+
+      #define L_PULL true
+      #define C_PULL false
+      #define U_PULL true
+      #define R_PULL true
+      #define D_PULL false
+    #endif
+
     #ifdef MARAUDER_MINI
       #define L_BTN 13
       #define C_BTN 34
       #define U_BTN 36
       #define R_BTN 39
       #define D_BTN 35
+
+      #define HAS_L
+      #define HAS_R
+      #define HAS_U
+      #define HAS_D
+      #define HAS_C
+
+      #define L_PULL true
+      #define C_PULL true
+      #define U_PULL true
+      #define R_PULL true
+      #define D_PULL true
+    #endif
+
+    #ifdef MARAUDER_V7
+      #define L_BTN 13
+      #define C_BTN 34
+      #define U_BTN 36
+      #define R_BTN 39
+      #define D_BTN 35
+
+      #define HAS_L
+      #define HAS_R
+      #define HAS_U
+      #define HAS_D
+      #define HAS_C
+
+      #define L_PULL true
+      #define C_PULL true
+      #define U_PULL true
+      #define R_PULL true
+      #define D_PULL true
     #endif
 
     #ifdef MARAUDER_M5STICKC
@@ -232,6 +333,18 @@
       #define U_BTN -1
       #define R_BTN -1
       #define D_BTN 39
+
+      //#define HAS_L
+      //#define HAS_R
+      //#define HAS_U
+      #define HAS_D
+      #define HAS_C
+
+      #define L_PULL true
+      #define C_PULL true
+      #define U_PULL true
+      #define R_PULL true
+      #define D_PULL true
     #endif
 
     #ifdef MARAUDER_V6
@@ -240,6 +353,18 @@
       #define U_BTN -1
       #define R_BTN -1
       #define D_BTN -1
+
+      //#define HAS_L
+      //#define HAS_R
+      //#define HAS_U
+      //#define HAS_D
+      #define HAS_C
+
+      #define L_PULL true
+      #define C_PULL true
+      #define U_PULL true
+      #define R_PULL true
+      #define D_PULL true
     #endif
 
     #ifdef MARAUDER_V6_1
@@ -248,7 +373,19 @@
       #define U_BTN -1
       #define R_BTN -1
       #define D_BTN -1
-    #endif  
+
+      //#define HAS_L
+      //#define HAS_R
+      //#define HAS_U
+      //#define HAS_D
+      #define HAS_C
+
+      #define L_PULL true
+      #define C_PULL true
+      #define U_PULL true
+      #define R_PULL true
+      #define D_PULL true
+    #endif
 
   #endif
   //// END BUTTON DEFINITIONS
@@ -299,27 +436,27 @@
       //#define MENU_FONT &FreeSans9pt7b
       //#define MENU_FONT &FreeSansBold9pt7b
       #define BUTTON_SCREEN_LIMIT 6
-      #define BUTTON_ARRAY_LEN 13
+      #define BUTTON_ARRAY_LEN 100
       #define STATUS_BAR_WIDTH (TFT_HEIGHT/16)
       #define LVGL_TICK_PERIOD 6
-    
+
       #define FRAME_X 100
       #define FRAME_Y 64
       #define FRAME_W 120
       #define FRAME_H 50
-    
+
       // Red zone size
       #define REDBUTTON_X FRAME_X
       #define REDBUTTON_Y FRAME_Y
       #define REDBUTTON_W (FRAME_W/2)
       #define REDBUTTON_H FRAME_H
-    
+
       // Green zone size
       #define GREENBUTTON_X (REDBUTTON_X + REDBUTTON_W)
       #define GREENBUTTON_Y FRAME_Y
       #define GREENBUTTON_W (FRAME_W/2)
       #define GREENBUTTON_H FRAME_H
-    
+
       #define STATUSBAR_COLOR 0x4A49
 
     #endif
@@ -338,7 +475,7 @@
       #endif
 
       #define TFT_SHIELD
-    
+
       #define SCREEN_WIDTH TFT_WIDTH
       #define SCREEN_HEIGHT TFT_HEIGHT
       #define HEIGHT_1 TFT_WIDTH
@@ -358,33 +495,33 @@
       #define BUTTON_ARRAY_LEN 12
       #define STATUS_BAR_WIDTH 16
       #define LVGL_TICK_PERIOD 6
-    
+
       #define FRAME_X 100
       #define FRAME_Y 64
       #define FRAME_W 120
       #define FRAME_H 50
-    
+
       // Red zone size
       #define REDBUTTON_X FRAME_X
       #define REDBUTTON_Y FRAME_Y
       #define REDBUTTON_W (FRAME_W/2)
       #define REDBUTTON_H FRAME_H
-    
+
       // Green zone size
       #define GREENBUTTON_X (REDBUTTON_X + REDBUTTON_W)
       #define GREENBUTTON_Y FRAME_Y
       #define GREENBUTTON_W (FRAME_W/2)
       #define GREENBUTTON_H FRAME_H
-    
+
       #define STATUSBAR_COLOR 0x4A49
-    
+
       #define KIT_LED_BUILTIN 13
     #endif
 
     #if defined(MARAUDER_V6) || defined(MARAUDER_V6_1)
       #define SCREEN_CHAR_WIDTH 40
       #define HAS_ILI9341
-    
+
       #define BANNER_TEXT_SIZE 2
 
       #ifndef TFT_WIDTH
@@ -396,7 +533,7 @@
       #endif
 
       #define TFT_DIY
-    
+
       #define SCREEN_WIDTH TFT_WIDTH
       #define SCREEN_HEIGHT TFT_HEIGHT
       #define HEIGHT_1 TFT_WIDTH
@@ -421,28 +558,91 @@
       #define FRAME_Y 64
       #define FRAME_W 120
       #define FRAME_H 50
-    
+
       // Red zone size
       #define REDBUTTON_X FRAME_X
       #define REDBUTTON_Y FRAME_Y
       #define REDBUTTON_W (FRAME_W/2)
       #define REDBUTTON_H FRAME_H
-    
+
       // Green zone size
       #define GREENBUTTON_X (REDBUTTON_X + REDBUTTON_W)
       #define GREENBUTTON_Y FRAME_Y
       #define GREENBUTTON_W (FRAME_W/2)
       #define GREENBUTTON_H FRAME_H
-    
+
       #define STATUSBAR_COLOR 0x4A49
-    
+
       #define KIT_LED_BUILTIN 13
-    #endif 
+    #endif
+
+    #ifdef MARAUDER_V7
+      #define SCREEN_CHAR_WIDTH 40
+      //#define HAS_ILI9341
+
+      #define BANNER_TEXT_SIZE 2
+
+      #ifndef TFT_WIDTH
+        #define TFT_WIDTH 240
+      #endif
+
+      #ifndef TFT_HEIGHT
+        #define TFT_HEIGHT 320
+      #endif
+
+      #define TFT_DIY
+
+      #define SCREEN_BUFFER
+
+      #define MAX_SCREEN_BUFFER 22
+
+      #define CHAR_WIDTH 12
+      #define SCREEN_WIDTH TFT_WIDTH
+      #define SCREEN_HEIGHT TFT_HEIGHT
+      #define HEIGHT_1 TFT_WIDTH
+      #define WIDTH_1 TFT_HEIGHT
+      #define STANDARD_FONT_CHAR_LIMIT (TFT_WIDTH/6) // number of characters on a single line with normal font
+      #define TEXT_HEIGHT 16 // Height of text to be printed and scrolled
+      #define BOT_FIXED_AREA 0 // Number of lines in bottom fixed area (lines counted from bottom of screen)
+      #define TOP_FIXED_AREA 48 // Number of lines in top fixed area (lines counted from top of screen)
+      #define YMAX 320 // Bottom of screen area
+      #define minimum(a,b)     (((a) < (b)) ? (a) : (b))
+      //#define MENU_FONT NULL
+      #define MENU_FONT &FreeMono9pt7b // Winner
+      //#define MENU_FONT &FreeMonoBold9pt7b
+      //#define MENU_FONT &FreeSans9pt7b
+      //#define MENU_FONT &FreeSansBold9pt7b
+      #define BUTTON_SCREEN_LIMIT 12
+      #define BUTTON_ARRAY_LEN 100
+      #define STATUS_BAR_WIDTH 16
+      #define LVGL_TICK_PERIOD 6
+
+      #define FRAME_X 100
+      #define FRAME_Y 64
+      #define FRAME_W 120
+      #define FRAME_H 50
+
+      // Red zone size
+      #define REDBUTTON_X FRAME_X
+      #define REDBUTTON_Y FRAME_Y
+      #define REDBUTTON_W (FRAME_W/2)
+      #define REDBUTTON_H FRAME_H
+
+      // Green zone size
+      #define GREENBUTTON_X (REDBUTTON_X + REDBUTTON_W)
+      #define GREENBUTTON_Y FRAME_Y
+      #define GREENBUTTON_W (FRAME_W/2)
+      #define GREENBUTTON_H FRAME_H
+
+      #define STATUSBAR_COLOR 0x4A49
+
+      #define KIT_LED_BUILTIN 13
+    #endif
 
     #ifdef MARAUDER_KIT
       #define SCREEN_CHAR_WIDTH 40
       #define HAS_ILI9341
-    
+
       #define BANNER_TEXT_SIZE 2
 
       #ifndef TFT_WIDTH
@@ -455,7 +655,7 @@
 
       #define TFT_DIY
       #define KIT
-    
+
       #define SCREEN_WIDTH TFT_WIDTH
       #define SCREEN_HEIGHT TFT_HEIGHT
       #define HEIGHT_1 TFT_WIDTH
@@ -492,12 +692,12 @@
       #define GREENBUTTON_Y FRAME_Y
       #define GREENBUTTON_W (FRAME_W/2)
       #define GREENBUTTON_H FRAME_H
-    
+
       #define STATUSBAR_COLOR 0x4A49
-    
+
       #define KIT_LED_BUILTIN 13
     #endif
-  
+
     #ifdef MARAUDER_MINI
       #define SCREEN_CHAR_WIDTH 40
       #define TFT_MISO 19
@@ -541,7 +741,7 @@
       //#define MENU_FONT &FreeSans9pt7b
       //#define MENU_FONT &FreeSansBold9pt7b
       #define BUTTON_SCREEN_LIMIT 10
-      #define BUTTON_ARRAY_LEN 13
+      #define BUTTON_ARRAY_LEN 100
       #define STATUS_BAR_WIDTH (TFT_HEIGHT/16)
       #define LVGL_TICK_PERIOD 6
 
@@ -561,7 +761,74 @@
       #define GREENBUTTON_Y FRAME_Y
       #define GREENBUTTON_W (FRAME_W/2)
       #define GREENBUTTON_H FRAME_H
-    
+
+      #define STATUSBAR_COLOR 0x4A49
+    #endif
+
+    #ifdef MARAUDER_REV_FEATHER
+      #define SCREEN_CHAR_WIDTH 40
+      //#define TFT_MISO 37
+      //#define TFT_MOSI 35
+      //#define TFT_SCLK 36
+      #define TFT_CS 42
+      #define TFT_DC 40
+      #define TFT_RST 41
+      #define TFT_BL 45
+      //#define TOUCH_CS 21
+      #define SD_CS 4
+
+      #define SCREEN_BUFFER
+
+      #define MAX_SCREEN_BUFFER 9
+
+      #define BANNER_TEXT_SIZE 1
+
+      #ifndef TFT_WIDTH
+        #define TFT_WIDTH 240
+      #endif
+
+      #ifndef TFT_HEIGHT
+        #define TFT_HEIGHT 135
+      #endif
+
+      #define CHAR_WIDTH 6
+      #define SCREEN_WIDTH TFT_WIDTH // Originally 240
+      #define SCREEN_HEIGHT TFT_HEIGHT // Originally 320
+      #define HEIGHT_1 TFT_WIDTH
+      #define WIDTH_1 TFT_WIDTH
+      #define STANDARD_FONT_CHAR_LIMIT (TFT_WIDTH/6) // number of characters on a single line with normal font
+      #define TEXT_HEIGHT (TFT_HEIGHT/10) // Height of text to be printed and scrolled
+      #define BOT_FIXED_AREA 0 // Number of lines in bottom fixed area (lines counted from bottom of screen)
+      #define TOP_FIXED_AREA 48 // Number of lines in top fixed area (lines counted from top of screen)
+      #define YMAX TFT_HEIGHT // Bottom of screen area
+      #define minimum(a,b)     (((a) < (b)) ? (a) : (b))
+      //#define MENU_FONT NULL
+      #define MENU_FONT &FreeMono9pt7b // Winner
+      //#define MENU_FONT &FreeMonoBold9pt7b
+      //#define MENU_FONT &FreeSans9pt7b
+      //#define MENU_FONT &FreeSansBold9pt7b
+      #define BUTTON_SCREEN_LIMIT 5
+      #define BUTTON_ARRAY_LEN 100
+      #define STATUS_BAR_WIDTH (TFT_HEIGHT/16)
+      #define LVGL_TICK_PERIOD 6
+
+      #define FRAME_X 100
+      #define FRAME_Y 64
+      #define FRAME_W 120
+      #define FRAME_H 50
+
+      // Red zone size
+      #define REDBUTTON_X FRAME_X
+      #define REDBUTTON_Y FRAME_Y
+      #define REDBUTTON_W (FRAME_W/2)
+      #define REDBUTTON_H FRAME_H
+
+      // Green zone size
+      #define GREENBUTTON_X (REDBUTTON_X + REDBUTTON_W)
+      #define GREENBUTTON_Y FRAME_Y
+      #define GREENBUTTON_W (FRAME_W/2)
+      #define GREENBUTTON_H FRAME_H
+
       #define STATUSBAR_COLOR 0x4A49
     #endif
 
@@ -571,9 +838,9 @@
   //// MENU DEFINITIONS
   #ifdef MARAUDER_V4
     #define BANNER_TIME 100
-    
+
     #define COMMAND_PREFIX "!"
-    
+
     // Keypad start position, key sizes and spacing
     #define KEY_X 120 // Centre of key
     #define KEY_Y 50
@@ -590,9 +857,28 @@
 
   #if defined(MARAUDER_V6) || defined(MARAUDER_V6_1)
     #define BANNER_TIME 100
-    
+
     #define COMMAND_PREFIX "!"
-    
+
+    // Keypad start position, key sizes and spacing
+    #define KEY_X 120 // Centre of key
+    #define KEY_Y 50
+    #define KEY_W 240 // Width and height
+    #define KEY_H 22
+    #define KEY_SPACING_X 0 // X and Y gap
+    #define KEY_SPACING_Y 1
+    #define KEY_TEXTSIZE 1   // Font size multiplier
+    #define ICON_W 22
+    #define ICON_H 22
+    #define BUTTON_PADDING 22
+    //#define BUTTON_ARRAY_LEN 5
+  #endif
+
+  #ifdef MARAUDER_V7
+    #define BANNER_TIME 100
+
+    #define COMMAND_PREFIX "!"
+
     // Keypad start position, key sizes and spacing
     #define KEY_X 120 // Centre of key
     #define KEY_Y 50
@@ -609,9 +895,9 @@
 
   #ifdef MARAUDER_KIT
     #define BANNER_TIME 100
-    
+
     #define COMMAND_PREFIX "!"
-    
+
     // Keypad start position, key sizes and spacing
     #define KEY_X 120 // Centre of key
     #define KEY_Y 50
@@ -625,12 +911,30 @@
     #define BUTTON_PADDING 22
     //#define BUTTON_ARRAY_LEN 5
   #endif
-  
+
   #ifdef MARAUDER_MINI
     #define BANNER_TIME 50
-    
+
     #define COMMAND_PREFIX "!"
-    
+
+    // Keypad start position, key sizes and spacing
+    #define KEY_X (TFT_WIDTH/2) // Centre of key
+    #define KEY_Y (TFT_HEIGHT/4.5)
+    #define KEY_W TFT_WIDTH // Width and height
+    #define KEY_H (TFT_HEIGHT/12.8)
+    #define KEY_SPACING_X 0 // X and Y gap
+    #define KEY_SPACING_Y 1
+    #define KEY_TEXTSIZE 1   // Font size multiplier
+    #define ICON_W 22
+    #define ICON_H 22
+    #define BUTTON_PADDING 10
+  #endif
+
+  #ifdef MARAUDER_REV_FEATHER
+    #define BANNER_TIME 50
+
+    #define COMMAND_PREFIX "!"
+
     // Keypad start position, key sizes and spacing
     #define KEY_X (TFT_WIDTH/2) // Centre of key
     #define KEY_Y (TFT_HEIGHT/4.5)
@@ -646,9 +950,9 @@
 
   #ifdef MARAUDER_M5STICKC
     #define BANNER_TIME 50
-    
+
     #define COMMAND_PREFIX "!"
-    
+
     // Keypad start position, key sizes and spacing
     #define KEY_X (TFT_WIDTH/2) // Centre of key
     #define KEY_Y (TFT_HEIGHT/5)
@@ -684,6 +988,14 @@
 
     #ifdef MARAUDER_MINI
       #define SD_CS 4
+    #endif
+
+    #ifdef MARAUDER_V7
+      #define SD_CS 4
+    #endif
+
+    #ifdef MARAUDER_REV_FEATHER
+      #define SD_CS 5
     #endif
 
     #ifdef MARAUDER_M5STICKC
@@ -741,6 +1053,10 @@
     #define MEM_LOWER_LIM 20000
   #elif defined(MARAUDER_MINI)
     #define MEM_LOWER_LIM 20000
+  #elif defined(MARAUDER_V7)
+    #define MEM_LOWER_LIM 20000
+  #elif defined(MARAUDER_REV_FEATHER)
+    #define MEM_LOWER_LIM 20000
   #elif defined(MARAUDER_V4)
     #define MEM_LOWER_LIM 20000
   #elif defined(MARAUDER_V6) || defined(MARAUDER_V6_1)
@@ -755,24 +1071,26 @@
     #define MEM_LOWER_LIM 20000
   #elif defined(MARAUDER_DEV_BOARD_PRO)
     #define MEM_LOWER_LIM 20000
-  #elif defined(XIAO_ESP32_S3)
+  #elif defined(BPMCIRCUITS_FEBERIS)
     #define MEM_LOWER_LIM 20000
-  #elif defined(MARAUDER_NETNINJA_BOARD)
+  #elif defined(XIAO_ESP32_S3)
     #define MEM_LOWER_LIM 20000
   #endif
   //// END MEMORY LOWER LIMIT STUFF
 
-  //// NEOPIXEL STUFF  
+  //// NEOPIXEL STUFF
   #ifdef HAS_NEOPIXEL_LED
-    
+
     #if defined(ESP32_LDDB)
       #define PIN 17
     #elif defined(MARAUDER_DEV_BOARD_PRO)
       #define PIN 16
+    #elif defined(MARAUDER_REV_FEATHER)
+      #define PIN 33
     #else
       #define PIN 25
     #endif
-  
+
   #endif
   //// END NEOPIXEL STUFF
 
@@ -781,6 +1099,10 @@
     #define MAX_HTML_SIZE 11400
   #elif defined(MARAUDER_MINI)
     #define MAX_HTML_SIZE 11400
+  #elif defined(MARAUDER_V7)
+    #define MAX_HTML_SIZE 11400
+  #elif defined(MARAUDER_REV_FEATHER)
+    #define MAX_HTML_SIZE 11400
   #elif defined(MARAUDER_V4)
     #define MAX_HTML_SIZE 11400
   #elif defined(MARAUDER_V6) || defined(MARAUDER_V6_1)
@@ -797,8 +1119,6 @@
     #define MAX_HTML_SIZE 20000
   #elif defined(XIAO_ESP32_S3)
     #define MAX_HTML_SIZE 20000
-  #elif defined(MARAUDER_NETNINJA_BOARD)
-    #define MAX_HTML_SIZE 11400
   #else
     #define MAX_HTML_SIZE 20000
   #endif
@@ -831,6 +1151,11 @@
       #define GPS_TX 21
       #define GPS_RX 22
       #define mac_history_len 512
+    #elif defined(MARAUDER_V7)
+      #define GPS_SERIAL_INDEX 2
+      #define GPS_TX 21
+      #define GPS_RX 22
+      #define mac_history_len 512
     #elif defined(MARAUDER_FLIPPER)
       #define GPS_SERIAL_INDEX 1
       #define GPS_TX 9
@@ -841,7 +1166,12 @@
       #define GPS_TX 33
       #define GPS_RX 32
       #define mac_history_len 512
-    #elif defined(MARAUDER_NETNINJA_BOARD)
+    #elif defined(MARAUDER_REV_FEATHER)
+      #define GPS_SERIAL_INDEX 1
+      #define GPS_TX 6
+      #define GPS_RX 9
+      #define mac_history_len 512
+    #elif defined(BPMCIRCUITS_FEBERIS)
       #define GPS_SERIAL_INDEX 2
       #define GPS_TX 4
       #define GPS_RX 13
@@ -852,6 +1182,46 @@
   #endif
   //// END GPS STUFF
 
+  //// BATTERY STUFF
+  #ifdef HAS_BATTERY
+
+    #ifdef MARAUDER_V4
+      #define I2C_SDA 33
+      #define I2C_SCL 22
+    #endif
+
+    #ifdef MARAUDER_V6
+      #define I2C_SDA 33
+      #define I2C_SCL 22
+    #endif
+
+    #ifdef MARAUDER_V6_1
+      #define I2C_SDA 33
+      #define I2C_SCL 22
+    #endif
+
+    #ifdef MARAUDER_M5STICKC
+      #define I2C_SDA 33
+      #define I2C_SCL 22
+    #endif
+
+    #ifdef MARAUDER_KIT
+      #define I2C_SDA 33
+      #define I2C_SCL 22
+    #endif
+
+    #ifdef MARAUDER_MINI
+      #define I2C_SDA 33
+      #define I2C_SCL 26
+    #endif
+
+    #ifdef MARAUDER_V7
+      #define I2C_SDA 33
+      #define I2C_SCL 16
+    #endif
+
+  #endif
+
   //// MARAUDER TITLE STUFF
   #ifdef MARAUDER_V4
     #define MARAUDER_TITLE_BYTES 13578
@@ -861,7 +1231,9 @@
     #define MARAUDER_TITLE_BYTES 13578
   #elif defined(MARAUDER_MINI)
     #define MARAUDER_TITLE_BYTES 13578
-  #elif defined(MARAUDER_NETNINJA_BOARD)
+  #elif defined(MARAUDER_V7)
+    #define MARAUDER_TITLE_BYTES 13578
+  #elif defined(MARAUDER_REV_FEATHER)
     #define MARAUDER_TITLE_BYTES 13578
   #else
     #define MARAUDER_TITLE_BYTES 13578

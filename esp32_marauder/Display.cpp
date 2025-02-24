@@ -28,6 +28,10 @@ void Display::RunSetup()
     tft.setRotation(1);
   #endif
 
+  #ifdef MARAUDER_REV_FEATHER
+    tft.setRotation(1);
+  #endif
+
   tft.setCursor(0, 0);
 
   #ifdef HAS_ILI9341
@@ -52,6 +56,14 @@ void Display::RunSetup()
 
   #ifdef KIT
     pinMode(KIT_LED_BUILTIN, OUTPUT);
+  #endif
+
+  #ifdef MARAUDER_REV_FEATHER
+    pinMode(7, OUTPUT);
+
+    delay(10);
+
+    digitalWrite(7, HIGH);
   #endif
 }
 
@@ -271,13 +283,42 @@ void Display::scrollScreenBuffer(bool down) {
 }
 #endif
 
+void Display::processAndPrintString(TFT_eSPI& tft, const String& originalString) {
+  // Define colors
+  uint16_t text_color = TFT_GREEN; // Default text color
+  uint16_t background_color = TFT_BLACK; // Default background color
+
+  String new_string = originalString;
+
+  // Check for color macros at the start of the string
+  if (new_string.startsWith(RED_KEY)) {
+    text_color = TFT_RED;
+    new_string.remove(0, strlen(RED_KEY)); // Remove the macro
+  } else if (new_string.startsWith(GREEN_KEY)) {
+    text_color = TFT_GREEN;
+    new_string.remove(0, strlen(GREEN_KEY)); // Remove the macro
+  } else if (new_string.startsWith(CYAN_KEY)) {
+    text_color = TFT_CYAN;
+    new_string.remove(0, strlen(CYAN_KEY)); // Remove the macro
+  } else if (new_string.startsWith(WHITE_KEY)) {
+    text_color = TFT_WHITE;
+    new_string.remove(0, strlen(WHITE_KEY)); // Remove the macro
+  } else if (new_string.startsWith(MAGENTA_KEY)) {
+    text_color = TFT_MAGENTA;
+    new_string.remove(0, strlen(MAGENTA_KEY)); // Remove the macro
+  }
+
+  // Set text color and print the string
+  tft.setTextColor(text_color, background_color);
+  tft.print(new_string);
+}
+
 void Display::displayBuffer(bool do_clear)
 {
   if (this->display_buffer->size() > 0)
   {
-    delay(1);
-
-    while (display_buffer->size() > 0)
+    int print_count = 1;
+    while ((display_buffer->size() > 0) && (print_count > 0))
     {
 
       #ifndef SCREEN_BUFFER
@@ -306,13 +347,19 @@ void Display::displayBuffer(bool do_clear)
 
         for (int i = 0; i < this->screen_buffer->size(); i++) {
           tft.setCursor(xPos, (i * 12) + (SCREEN_HEIGHT / 6));
-          for (int x = 0; x < TFT_WIDTH / CHAR_WIDTH; x++)
-            tft.print(" ");
+          String spaces = String(' ', TFT_WIDTH / CHAR_WIDTH);
+          //for (int x = 0; x < TFT_WIDTH / CHAR_WIDTH; x++)
+          //  tft.print(" ");
+          tft.print(spaces);
           tft.setCursor(xPos, (i * 12) + (SCREEN_HEIGHT / 6));
-          tft.setTextColor(TFT_GREEN, TFT_BLACK);
-          tft.print(this->screen_buffer->get(i));
+
+          this->processAndPrintString(tft, this->screen_buffer->get(i));
+          //tft.setTextColor(TFT_GREEN, TFT_BLACK);
+          //tft.print(this->screen_buffer->get(i));
         }
       #endif
+
+      print_count--;
     }
   }
 }
@@ -410,6 +457,7 @@ void Display::scrollAddress(uint16_t vsp) {
 
 
 // JPEG_functions
+/*
 void Display::drawJpeg(const char *filename, int xpos, int ypos) {
 
   // Open the named file (the Jpeg decoder library will close it after rendering image)
@@ -440,6 +488,7 @@ void Display::drawJpeg(const char *filename, int xpos, int ypos) {
   //  Serial.println(F("Jpeg file format not supported!"));
   //}
 }
+*/
 
 /*void Display::setupDraw() {
   this->tft.drawLine(0, 0, 10, 0, TFT_MAGENTA);

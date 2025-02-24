@@ -31,6 +31,7 @@ extern WiFiScan wifi_scan_obj;
 extern Settings settings_obj;
 extern LedInterface led_obj;
 extern LinkedList<AccessPoint>* access_points;
+extern LinkedList<AirTag>* airtags;
 extern LinkedList<ssid>* ssids;
 extern LinkedList<Station>* stations;
 extern const String PROGMEM version_number;
@@ -77,10 +78,13 @@ const char PROGMEM ATTACK_TYPE_RR[] = "rickroll";
 const char PROGMEM LIST_AP_CMD[] = "list";
 const char PROGMEM SEL_CMD[] = "select";
 const char PROGMEM SSID_CMD[] = "ssid";
+const char PROGMEM SAVE_CMD[] = "save";
+const char PROGMEM LOAD_CMD[] = "load";
 
 // Bluetooth sniff/scan
 const char PROGMEM BT_SPAM_CMD[] = "blespam";
 const char PROGMEM BT_SNIFF_CMD[] = "sniffbt";
+const char PROGMEM BT_SPOOFAT_CMD[] = "spoofat";
 //const char PROGMEM BT_SOUR_APPLE_CMD[] = "sourapple";
 //const char PROGMEM BT_SWIFTPAIR_SPAM_CMD[] = "swiftpair";
 //const char PROGMEM BT_SAMSUNG_SPAM_CMD[] = "samsungblespam";
@@ -125,13 +129,17 @@ const char PROGMEM HELP_ATTACK_CMD[] = "attack -t <beacon [-l/-r/-a]/deauth [-c]
 const char PROGMEM HELP_LIST_AP_CMD_A[] = "list -s";
 const char PROGMEM HELP_LIST_AP_CMD_B[] = "list -a";
 const char PROGMEM HELP_LIST_AP_CMD_C[] = "list -c";
+const char PROGMEM HELP_LIST_AP_CMD_D[] = "list -t";
 const char PROGMEM HELP_SEL_CMD_A[] = "select -a/-s/-c <index (comma separated)>/-f \"equals <String> or contains <String>\"";
 const char PROGMEM HELP_SSID_CMD_A[] = "ssid -a [-g <count>/-n <name>]";
 const char PROGMEM HELP_SSID_CMD_B[] = "ssid -r <index>";
+const char PROGMEM HELP_SAVE_CMD[] = "save -a/-s";
+const char PROGMEM HELP_LOAD_CMD[] = "load -a/-s";
 
 // Bluetooth sniff/scan
-const char PROGMEM HELP_BT_SNIFF_CMD[] = "sniffbt";
-const char PROGMEM HELP_BT_SPAM_CMD[] = "blespam -t <apple/google/samsung/windows/all>";
+const char PROGMEM HELP_BT_SNIFF_CMD[] = "sniffbt [-t] <airtag/flipper>";
+const char PROGMEM HELP_BT_SPAM_CMD[] = "blespam -t <apple/google/samsung/windows/flipper/all>";
+const char PROGMEM HELP_BT_SPOOFAT_CMD[] = "spoofat -t <index>";
 //const char PROGMEM HELP_BT_SOUR_APPLE_CMD[] = "sourapple";
 //const char PROGMEM HELP_BT_SWIFTPAIR_SPAM_CMD[] = "swiftpair";
 //const char PROGMEM HELP_BT_SAMSUNG_SPAM_CMD[] = "samsungblespam";
